@@ -1,0 +1,26 @@
+---
+layout: default
+title: "Directus x DevCycle"
+description: "Demo of Directus and DevCycle Working Together"
+---
+<div class="relative flex items-center justify-center h-screen bg-purple-500 lg:h-screen">
+
+  <div class="container p-4 mx-auto ">
+    <div class="mb-10">
+      <button class="absolute top-0 right-0 px-4 py-2 m-10 text-white bg-pink-400 rounded-lg" data-netlify-identity-button></button>
+      <h1 class="text-6xl text-center text-white ">Welcome to Newsletter Inc.</h1>
+      <p class="text-xl text-center text-white "> Register for our newsletter to access exclusive widgets. </p>
+    </div>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+      {%- for data in directus.data -%}
+      
+      <div data-tier="{{data.tier}}" class="w-full p-4 bg-white border rounded-lg">
+        <div class="px-1 py-4">
+          <h1 class="mb-2 text-3xl font-bold text-center">{{data.title}} </h1>
+          <p class="mb-2 text-lg text-center">({{data.tier}}) </p>
+        </div>
+      </div>
+      {%- endfor -%}
+      <div>
+      </div>
+    </div>

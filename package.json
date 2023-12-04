@@ -1,0 +1,20 @@
+{
+  "name": "devycycle-directus-demo",
+  "description": "Demo showcase the integration of Ghost, DevCycle, Directus, Netlify and Eleventy",
+  "scripts": {
+    "serve": "rm -rf _site && npx @11ty/eleventy --serve --quiet & npx tailwindcss -i ./src/tailwind.css -o ./_site/styles.css --watch",
+    "build": "rm -rf _site && ELEVENTY_ENV=production npx @11ty/eleventy && npx tailwindcss -i ./src/tailwind.css -o ./_site/styles.css --minify"
+  },
+  "keywords": [],
+  "author": "Andrew MacLean",
+  "license": "MIT",
+  "browserslist": "defaults, not ie <= 11",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "tailwindcss": "^3.3.5"
+  },
+  "dependencies": {
+    "@11ty/eleventy-fetch": "^4.0.0",
+    "dotenv": "^16.3.1"
+  }
+}
