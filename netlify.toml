@@ -1,5 +1,5 @@
 [template]
   incoming-hooks = ["Directus"]
 [template.environment]
-  DEVCYCLE_CLIENT_KEY = "change me for your secret token"
-  DIRECTUS_API_URL = "set the url to your Directus instance here"
+  DEVCYCLE_CLIENT_KEY = "Change me to your DevCycle Projects Client SDK Key"
+  DIRECTUS_API_URL = "Change me to the API url for your Directus Instance"
