@@ -14,10 +14,10 @@ description: "Demo of Directus and DevCycle Working Together"
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
       {%- for data in directus.data -%}
       
-      <div data-tier="{{data.tier}}" class="w-full p-4 bg-white border rounded-lg">
+      <div data-type="{{data.type}}" class="w-full p-4 bg-white border rounded-lg">
         <div class="px-1 py-4">
           <h1 class="mb-2 text-3xl font-bold text-center">{{data.title}} </h1>
-          <p class="mb-2 text-lg text-center">({{data.tier}}) </p>
+          <p class="mb-2 text-lg text-center">({{data.type}}) </p>
         </div>
       </div>
       {%- endfor -%}

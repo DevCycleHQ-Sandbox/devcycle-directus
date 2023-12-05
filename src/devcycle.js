@@ -10,20 +10,20 @@ const dvcOptions = {
 const devcycleClient = DevCycle.initializeDevCycle(clientKey, user, dvcOptions);
 
 function hideExclusiveElements() {
-  const elements = document.querySelectorAll("[data-tier]");
+  const elements = document.querySelectorAll("[data-type]");
 
   elements.forEach((element) => {
-    if (element.getAttribute("data-tier") === "members") {
+    if (element.getAttribute("data-type") === "members") {
       element.style.display = "none"; // Hide the element
     }
   });
 }
 
 function showExclusiveWidgets() {
-  const elements = document.querySelectorAll("[data-tier]");
+  const elements = document.querySelectorAll("[data-type]");
 
   elements.forEach((element) => {
-    if (element.getAttribute("data-tier") === "members") {
+    if (element.getAttribute("data-type") === "members") {
       element.style.display = "";
     }
   });
