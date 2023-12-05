@@ -19,7 +19,7 @@ function hideExclusiveElements() {
   });
 }
 
-function showExclusiveWidgets() {
+function showExclusiveElements() {
   const elements = document.querySelectorAll("[data-type]");
 
   elements.forEach((element) => {
@@ -38,7 +38,7 @@ function handleExclusiveUser(isExclusive) {
 }
 
 devcycleClient.onClientInitialized().then(() => {
-  const isExclusiveUser = devcycleClient.variableValue("exclusive-content", false);
+  const isExclusiveUser = devcycleClient.variableValue("member-content", false);
   handleExclusiveUser(isExclusiveUser);
 });
 
@@ -46,7 +46,7 @@ devcycleClient.onClientInitialized().then(() => {
 netlifyIdentity.on("login", (userObj) => {
   user.user_id = userObj.email;
   devcycleClient.identifyUser(user, (err, variables) => {
-    const isExclusiveUser = devcycleClient.variableValue("exclusive-content", false);
+    const isExclusiveUser = devcycleClient.variableValue("member-content", false);
     handleExclusiveUser(isExclusiveUser);
   });
 });
@@ -54,7 +54,7 @@ netlifyIdentity.on("login", (userObj) => {
 netlifyIdentity.on("logout", () => {
   user.user_id = "anonymous_user";
   devcycleClient.identifyUser(user, (err, variables) => {
-    const isExclusiveUser = devcycleClient.variableValue("exclusive-content", false);
+    const isExclusiveUser = devcycleClient.variableValue("member-content", false);
     handleExclusiveUser(isExclusiveUser);
   });
 });
