@@ -1,5 +1,27 @@
 [template]
-  incoming-hooks = ["Directus"]
-[template.environment]
-  DEVCYCLE_CLIENT_KEY = "Change me to your DevCycle Projects Client SDK Key"
-  DIRECTUS_API_URL = "Change me to the API url for your Directus Instance"
+incoming-hooks = [ "Directus" ]
+
+  [template.environment]
+  DIRECTUS_CONTENT_API_ENDPOINT = "The content API url for your Directus Instance"
+  DIRECTUS_TRIGGER_WEBHOOK_ENDPOINT = "The content API url for your Directus Instance"
+  DEVCYCLE_SERVER_SDK_KEY = "Your DevCycle Projects Client SDK Key"
+  GITHUB_OAUTH_CLIENT_ID = "Your GitHub 0Auth Application Client ID"
+  GITHUB_OAUTH_CLIENT_SECRET = "Your GitHub 0Auth Application Client Secret"
+
+[build]
+publish = "_site"
+command = "npm run build"
+
+[[redirects]]
+from = "/"
+to = "/.netlify/functions/dynamic"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "dynamic"
+
+[[redirects]]
+from = "/secure/"
+to = "/.netlify/functions/dynamic"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "dynamic"

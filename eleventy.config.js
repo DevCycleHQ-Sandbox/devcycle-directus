@@ -1,18 +1,19 @@
-require('dotenv').config();
+require("dotenv").config();
+const { EleventyServerlessBundlerPlugin } = require("@11ty/eleventy");
 
 module.exports = function (eleventyConfig) {
-
-  eleventyConfig.addGlobalData("clientKey", process.env.DEVCYCLE_CLIENT_KEY);
-
-  eleventyConfig.addPassthroughCopy("src/devcycle.js");
-
   eleventyConfig.setServerOptions({
-    watch: ['_site/**/*.css'],
+    watch: ["_site/**/*.css"],
+  });
+
+  eleventyConfig.addPlugin(EleventyServerlessBundlerPlugin, {
+    name: "dynamic",
+    functionsDir: "./netlify/functions/",
   });
 
   return {
     dir: {
-      input: 'src',
+      input: "src",
     },
   };
 };

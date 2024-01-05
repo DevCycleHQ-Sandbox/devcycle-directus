@@ -3,11 +3,12 @@ layout: default
 title: "Directus x DevCycle"
 description: "Demo of Directus and DevCycle Working Together"
 permalink:
-  dynamic: "/"
+  dynamic: "/secure/"
+secure:
+  unauthenticatedRedirect: "/"
 ---
 <section class="w-full px-6 pb-12 antialiased bg-white">
   <div class="mx-auto max-w-7xl">
-
     <nav class="relative z-50 h-24 select-none" x-data="{ showMenu: false }">
       <div
         class="container relative flex flex-wrap items-center justify-between h-24 mx-auto overflow-hidden font-medium border-b border-gray-200 md:overflow-visible lg:justify-center sm:px-4 md:px-2 lg:px-0">
@@ -54,29 +55,13 @@ permalink:
               class="flex flex-col items-start justify-center w-full space-x-6 text-center lg:space-x-8 md:w-2/3 md:mt-0 md:flex-row md:items-center">
 
             </div>
-
-
             <div class="flex flex-col items-start justify-end w-full pt-4 md:items-center md:w-1/3 md:flex-row md:py-0">
-
-              {% if user %}
-              <a href="/secure/">View Product News</a>
-
-              {% include "logout.liquid" %}
-              {% else %}
-              <form action="/.netlify/functions/auth-before">
-                <input type="hidden" name="securePath" value="/secure/">
-                <button type="submit" name="provider" value="github"
+              <form action="{{ page.url }}" method="get">
+                <input type="hidden" name="logout" value="">
+                <button type="submit"
                   class="inline-flex items-center w-full px-5 px-6 py-3 text-sm font-medium leading-4 text-white bg-gray-900 md:w-auto md:rounded-full hover:bg-gray-800 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-gray-800">Sign
-                  In</button>
+                  Out</button>
               </form>
-
-              {% endif %}
-
-
-
-
-
-
 
             </div>
           </div>
@@ -84,63 +69,54 @@ permalink:
       </div>
     </nav>
 
-
-
-
-    
     <!-- Main Hero Content -->
     <div
-      class="container max-w-sm py-32 mx-auto mt-px mb-10 text-left sm:max-w-md md:max-w-lg sm:px-4 md:max-w-none md:text-center">
-            <!-- Component: Simple Success Alert -->
-<div style="display: none" class="w-full px-4 py-3 text-sm border rounded border-emerald-100 bg-emerald-50 text-emerald-500" role="alert" id="thanks-message">
-  <p>Thanks for signing up for our early access list!</p>
-</div>
-<!-- End Simple Success Alert -->
+      class="container max-w-sm py-32 mx-auto mt-px text-left sm:max-w-md md:max-w-lg sm:px-4 md:max-w-none md:text-center">
 
-<!-- Component: Simple Danger Alert -->
-<div style="display: none" class="w-full px-4 py-3 mb-10 text-sm text-pink-500 border border-pink-100 rounded bg-pink-50" role="alert" id="signup-message">
-  <p>Sign-up using the button below to get early access!</p>
-</div>
-<!-- End Simple Danger Alert -->
+      <div class="py-24 bg-white sm:py-8">
+        <div class="px-6 mx-auto max-w-7xl lg:px-8">
+          <div class="max-w-2xl mx-auto">
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">News From the team</h2>
+            <p class="mt-2 text-lg leading-8 text-gray-600">Learn more about our awesome new project.</p>
+            <div class="pt-10 mt-10 space-y-16 border-t border-gray-200 sm:mt-16 sm:pt-16">
 
-      <h1
-        class="text-3xl font-bold leading-10 tracking-tight text-left text-gray-900 md:text-center sm:text-4xl md:text-7xl lg:text-8xl">
-        Start Crafting Your <br class="hidden sm:block"> Next Great Idea</h1>
-      <div class="mx-auto mt-5 text-gray-400 md:mt-8 md:max-w-lg md:text-center md:text-xl">Simplifying the creation of
-        landing pages, blog pages, application pages and so much more!</div>
+              {%- for data in news.data -%}
+              <article class="flex flex-col items-start justify-between max-w-xl">
+                <div class="flex items-center text-xs gap-x-4">
+                  <time datetime="" class="text-gray-500">{{data.date_created | date: "%a, %b %d, %Y" }}</time>
+                  <a href="#"
+                    class="relative z-10 rounded-full bg-green-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Announcement</a>
+                </div>
+                <div class="relative group">
+                  <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                    <a href="#">
+                      <span class="absolute inset-0"></span>
+                      {{data.title}}
+                    </a>
+                  </h3>
+                  <p class="mt-5 text-sm leading-6 text-gray-600 line-clamp-3">{{data.description}}</p>
+                </div>
+                <div class="relative flex items-center mt-8 gap-x-4">
+                  <img src="https://i.pravatar.cc/300" alt="" class="w-10 h-10 rounded-full bg-gray-50">
+                  <div class="text-sm leading-6">
+                    <p class="font-semibold text-gray-900">
+                      <a href="#">
+                        <span class="absolute inset-0"></span>
+                        Your Name
+                      </a>
+                    </p>
+                    <p class="text-gray-600">Head of Product</p>
+                  </div>
+                </div>
+              </article>
+              {%- endfor -%}
 
-
-
-      <div
-        class="flex flex-col items-center justify-center mt-8 space-y-4 text-center sm:flex-row sm:space-y-0 sm:space-x-4">
-
-
-        <span class="relative inline-flex w-full md:w-auto">
-
-          <form data-netlify="true" action="/.netlify/functions/auth-before">
-            <input type="hidden" name="signUp" value="true">
-            <input type="hidden" name="securePath" value="/auth/">
-            <button type="submit" name="provider" value="github"
-              class="inline-flex items-center justify-center w-full px-8 py-4 text-base font-medium leading-6 text-white bg-gray-900 border border-transparent rounded-full xl:px-10 md:w-auto hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800">
-              Get Early Access
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" data-slot="icon" class="w-6 h-6 ml-2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
-              </svg>
-            </button>
-          </form>
-        </span>
-        <span class="relative inline-flex w-full md:w-auto">
-          <a href="#_"
-            class="inline-flex items-center justify-center w-full px-8 py-4 text-base font-medium leading-6 text-gray-900 bg-gray-100 border border-transparent rounded-full xl:px-10 md:w-auto hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200">Learn
-            More</a>
-        </span>
+            </div>
+          </div>
+        </div>
       </div>
-
-     
     </div>
     <!-- End Main Hero Content -->
-
   </div>
 
 </section>

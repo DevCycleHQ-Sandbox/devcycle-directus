@@ -1,16 +1,52 @@
 <!DOCTYPE html>
 <html class="overflow-y-scroll" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" />
-    <meta name="description" content="{% if description %}{{ description }}{% else %}Your site description{% endif %}" />
-    <title>{% if title %}{{ title }}{% else %}Your site title{% endif %}</title>
-    <link rel="stylesheet" href="/styles.css" />
-    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script src="https://js.devcycle.com/devcycle.min.js" type="text/javascript"></script>
-    <script data-sdk-key="{{ clientKey }}" src="/devcycle.js"></script>
-  </head>
-  <body>
-    {{ content }}
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" />
+  <meta name="description" content="{% if description %}{{ description }}{% else %}Your site description{% endif %}" />
+  <title>{% if title %}{{ title }}{% else %}Your site title{% endif %}</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  {{ content }}
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+   
+    // Function to show message
+      function showMessage(id) {
+        const messageElement = document.getElementById(id);
+        messageElement.style.display = "block";
+        setTimeout(function () {
+          messageElement.style.display = "none";
+        }, 5000);
+      }
+
+      // Function to read a cookie
+      const getCookieValue = (name) => (
+        document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
+      )
+
+      // Check for the flash message cookie
+      const flashMessage = getCookieValue("flashMessage");
+
+      if (flashMessage === "accessRestricted") {
+        showMessage("signup-message");
+        // Optionally, remove the cookie after showing the message
+        document.cookie = "flashMessage=; Max-Age=-1; Path=/;";
+      }
+
+      if (flashMessage === "isSignup") {
+        showMessage("thanks-message");
+        // Optionally, remove the cookie after showing the message
+        document.cookie = "flashMessage=; Max-Age=-1; Path=/;";
+      }
+    });
+  </script>
+
+
+</body>
+
 </html>
