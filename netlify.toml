@@ -4,7 +4,7 @@ incoming-hooks = [ "Directus" ]
   [template.environment]
   DIRECTUS_CONTENT_API_ENDPOINT = "The content API url for your Directus Instance"
   DIRECTUS_TRIGGER_WEBHOOK_ENDPOINT = "The trigger webhook endpoint for your Directus Instance"
-  DEVCYCLE_SERVER_SDK_KEY = "Your DevCycle Projects Client SDK Key"
+  DEVCYCLE_SERVER_SDK_KEY = "Your DevCycle Projects Server SDK Key"
   GITHUB_OAUTH_CLIENT_ID = "Your GitHub 0Auth Application Client ID"
   GITHUB_OAUTH_CLIENT_SECRET = "Your GitHub 0Auth Application Client Secret"
 
